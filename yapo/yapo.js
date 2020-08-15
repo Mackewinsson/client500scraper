@@ -3,7 +3,6 @@
 const requestPromise = require("request-promise");
 const cheerio = require("cheerio");
 const fs = require("fs");
-const { Parser } = require("json2csv");
 const tesseract = require("./tesseract");
 const puppeteer = require("./puppeteer");
 const iconv = require("iconv-lite");
@@ -71,6 +70,7 @@ const yaposcrapper = {
 
         gzip: true,
         resolveWithFullResponse: true,
+        encoding: null,
       });
     } catch (error) {
       console.error(error);
@@ -131,6 +131,7 @@ const yaposcrapper = {
           // GZIP PARAMETER IS NECESARY TO UNZIP THE RESULTS FROM GZIP
 
           gzip: true,
+          encoding: null,
         });
       } catch (error) {
         console.error(error);
@@ -181,6 +182,7 @@ const yaposcrapper = {
           // GZIP PARAMETER IS NECESARY TO UNZIP THE RESULTS FROM GZIP
 
           gzip: true,
+          encoding: null,
         });
       } catch (error) {
         console.error(error);
@@ -213,7 +215,7 @@ const yaposcrapper = {
       let refcode = $('div[id="dataAd"]').attr("data-id");
       let description = $('div[class="description"] > p')
         .text()
-        .replace(/(?:\r\n|\r|\n)/g, "")
+        .replace(/(?:\r\n|\r|\n)/g, " ")
         .trim();
       let number;
       /* -------------------------------------------------------------------------- */

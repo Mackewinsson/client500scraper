@@ -1,24 +1,9 @@
 const yaposcraper = require("./yapo/yapo");
 const mongoose = require("mongoose");
 const fs = require("fs");
+const connectToMongoDb = require("./db/mongoConnection");
 const clientData = require("./db/mongooseSchema");
 require("dotenv").config();
-
-const dbUser = process.env.DB_USER;
-const dbPassword = process.env.DB_PASSWORD;
-
-async function connectToMongoDb() {
-  try {
-    await mongoose.connect(
-      `mongodb+srv://${dbUser}:${dbPassword}@client500.6zvzp.mongodb.net/<dbname>?retryWrites=true&w=majority`,
-      { useNewUrlParser: true, useUnifiedTopology: true }
-    );
-    console.log("Connected to DB");
-  } catch (err) {
-    console.error("There is a connection problem to the DB");
-    console.error(err);
-  }
-}
 
 function readData(dataFile) {
   const rawData = fs.readFileSync(dataFile);
