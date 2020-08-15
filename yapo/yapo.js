@@ -149,7 +149,7 @@ const yaposcrapper = {
     /* -------------------------------------------------------------------------- */
 
     for (let i = 0; i < itemsUrlsArray.length; i++) {
-      console.log(`Scraping item ${i}...`);
+      console.log(`Scraping item ${i + 1}...`);
       try {
         response = await requestPromise({
           // PARAMETERS FOR THE REQUEST METHOD
@@ -195,6 +195,7 @@ const yaposcrapper = {
 
       $ = cheerio.load(decodedResponse);
       // GETING THE ELEMENTS THAT I NEED FORM EACH ARTICLE
+      let url = itemsUrlsArray[i];
       let title = $('h1[id="da_subject"]').text();
       let price = $('div[id="dataAd"]').attr("data-price");
       let seller = $("seller-info").attr("username");
@@ -243,6 +244,7 @@ const yaposcrapper = {
       /* -------------------------------------------------------------------------- */
 
       resultsObject.push({
+        url,
         titulo: title,
         precio: price,
         titular: seller,
@@ -259,6 +261,7 @@ const yaposcrapper = {
       fs.writeFileSync("resultsObject.json", data);
       console.log(`Scrapped Successfull`);
     }
+    // return resultsObject;
   },
 };
 

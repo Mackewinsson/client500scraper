@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const clientData = mongoose.model(
   "ClientData",
   mongoose.Schema({
+    url: String,
     titulo: String,
     precio: String,
     titular: String,
