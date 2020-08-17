@@ -1,24 +1,11 @@
-const connectToMongoDb = require("./mongoConnection");
 const clientData = require("./mongooseSchema");
-const fs = require("fs");
-const mongoose = require("mongoose");
 
-function readData(dataFile) {
-  const rawData = fs.readFileSync(dataFile);
-  const data = JSON.parse(rawData);
-  return data;
-}
-
-async function insertToDb() {
-  // CONNECT TO MONGODB
-  await connectToMongoDb();
-  //Read the data file
-  const data = await readData("./resultsObject.json");
+async function insertToDb(data) {
   // Save data to MONGODB
-  data.forEach(async (element) => {
+  const promises = data.map(async (element) => {
     const dataFromDb = await clientData.findOne({ url: element.url });
     if (dataFromDb == null) {
-      const dataModel = new clientData({
+      const newClient = new clientData({
         url: element.url,
         titulo: element.titulo,
         precio: element.precio,
@@ -31,13 +18,11 @@ async function insertToDb() {
         codigo: element.codigo,
         descripcion: element.descripcion,
       });
-      dataModel.save();
+      newClient.save();
     }
+    await Promise.all(promises);
   });
-  console.log("Data SAVED to DB");
+  console.log("Items inserted to the DB");
 }
-// Some is happening with the reading of the data
-// Is working in this file but not in app.js
-// when i put mongoose.disconnect NOT WORKING
 
 module.exports = insertToDb;

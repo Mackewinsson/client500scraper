@@ -2,7 +2,6 @@
 
 const requestPromise = require("request-promise");
 const cheerio = require("cheerio");
-const fs = require("fs");
 const tesseract = require("./tesseract");
 const puppeteer = require("./puppeteer");
 const iconv = require("iconv-lite");
@@ -256,12 +255,9 @@ const yaposcrapper = {
         codigo: refcode,
         descripcion: description,
       });
-      // CREATE JSONFILE
-      let data = JSON.stringify(resultsObject);
-      fs.writeFileSync("resultsObject.json", data);
-      console.log(`Scrapped Successfull`);
+      break;
     }
-    // return resultsObject;
+    return resultsObject;
   },
 };
 
