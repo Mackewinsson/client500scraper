@@ -255,7 +255,7 @@ const yaposcrapper = {
         codigo: refcode,
         descripcion: description,
       });
-      break;
+      // break;
     }
     return resultsObject;
   },

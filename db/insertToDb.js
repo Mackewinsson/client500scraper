@@ -3,7 +3,8 @@ const clientData = require("./mongooseSchema");
 async function insertToDb(data) {
   // Save data to MONGODB
   const promises = data.map(async (element) => {
-    const dataFromDb = await clientData.findOne({ url: element.url });
+    const dataFromDb = await clientData.findOne({ codigo: element.codigo });
+    console.log(dataFromDb);
     if (dataFromDb == null) {
       const newClient = new clientData({
         url: element.url,
@@ -18,7 +19,7 @@ async function insertToDb(data) {
         codigo: element.codigo,
         descripcion: element.descripcion,
       });
-      newClient.save();
+      await newClient.save();
     }
     await Promise.all(promises);
   });

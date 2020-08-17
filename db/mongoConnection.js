@@ -10,7 +10,7 @@ async function connectToMongoDb() {
       `mongodb+srv://${dbUser}:${dbPassword}@client500.6zvzp.mongodb.net/clientsData?retryWrites=true&w=majority`,
       { useNewUrlParser: true, useUnifiedTopology: true }
     );
-    console.log("Connected to DB");
+    return "Connected to DB";
   } catch (err) {
     console.error("There is a connection problem to the DB");
     console.error(err);
