@@ -1,19 +1,27 @@
-const yaposcraper = require("./yapo/yapo");
-const insertToDb = require("./db/insertToDb");
-const connectToMongoDb = require("./db/mongoConnection");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const main = require("./main");
+var cron = require("node-cron");
 
-const URL =
-  "https://www.yapo.cl/region_metropolitana/inmuebles?ca=15_s&l=0&f=p&w=1&cmn=&st=a";
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
 
-(async () => {
-  try {
-    const connect = await connectToMongoDb();
-    console.log(connect);
-    // SCRAPE
-    const data = await yaposcraper.scrape(URL, 1);
-    // INSERT DATA TO DB
-    await insertToDb(data);
-  } catch (err) {
-    console.error(err);
-  }
-})();
+// CRON JOB
+cron.schedule("*/5 * * * *", () => {
+  main();
+});
+
+const app = express();
+
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
+
+module.exports = app;

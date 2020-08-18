@@ -4,8 +4,10 @@ async function insertToDb(data) {
   // Save data to MONGODB
   const promises = data.map(async (element) => {
     const dataFromDb = await clientData.findOne({ codigo: element.codigo });
-    console.log(dataFromDb);
-    if (dataFromDb == null) {
+    if (dataFromDb) {
+      console.log("Item is already in the DB");
+    } else if (dataFromDb == null) {
+      console.log("Item NOT in the db");
       const newClient = new clientData({
         url: element.url,
         titulo: element.titulo,
