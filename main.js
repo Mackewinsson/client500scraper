@@ -17,6 +17,8 @@ async function main() {
     console.error(err);
   }
 }
+
+main();
 //All working
 
 module.exports = main;
