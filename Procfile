@@ -1,2 +1,1 @@
-web: node ./bin/www
-worker: node main.js
+worker: node app.js
