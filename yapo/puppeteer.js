@@ -1,8 +1,9 @@
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
 
 const screenshot = {
   takeSS: async (URL, SSpath) => {
     const browser = await puppeteer.launch({
+	executablePath: '/usr/bin/chromium-browser',
       // devtools: true,
       // headless: false,
       defaultViewport: {
