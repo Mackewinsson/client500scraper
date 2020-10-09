@@ -12,11 +12,12 @@ async function main() {
     const connect = await connectToMongoDb();
     console.log(connect);
     // SCRAPE
-    const data = await yaposcraper.scrape(URL, 2);
+    const data = await yaposcraper.scrape(URL, 1);
     // INSERT DATA TO DB
     await insertToDb(data);
     // Create CSV
     await jsonToCsv(data);
+    process.exit()
   } catch (err) {
     console.error(err);
   }

@@ -195,7 +195,8 @@ const yaposcrapper = {
       $ = cheerio.load(decodedResponse);
       // GETING THE ELEMENTS THAT I NEED FORM EACH ARTICLE
       let url = itemsUrlsArray[i];
-      let title = $('h1[id="da_subject"]').text();
+      // let title = $('#da_subject').text();
+      // console.log(title);
       let price = $('div[id="dataAd"]').attr("data-price");
       let seller = $("seller-info").attr("username");
       let ispro = $("seller-info").attr("ispro");
@@ -211,7 +212,7 @@ const yaposcrapper = {
         .text();
       let phoneUrl = $("seller-info").attr("phoneurl").replace(/['"]+/g, "");
       let phoneLink = `https://www.yapo.cl${phoneUrl}`;
-      let timePublished = $("time").text();
+      // let timePublished = $("time").text();
       let refcode = $('div[id="dataAd"]').attr("data-id");
       let description = $('div[class="description"] > p')
         .text()
@@ -244,14 +245,14 @@ const yaposcrapper = {
 
       resultsObject.push({
         url,
-        titulo: title,
+        // titulo: title,
         precio: price,
         titular: seller,
         region,
         comuna,
         telefono: number,
         telefonoLink: phoneLink,
-        fechaPublicacion: timePublished,
+        // fechaPublicacion: timePublished,
         codigo: refcode,
         descripcion: description,
       });
