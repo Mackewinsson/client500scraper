@@ -4,7 +4,6 @@ const fs = require("fs");
 const jsonToCsv = (data) =>{
 
     const json = data;
-    console.log(json);
 
      // HERE I CONVERT JSON TO CSV
 

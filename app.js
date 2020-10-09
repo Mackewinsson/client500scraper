@@ -5,16 +5,16 @@ const jsonCsv = require('./utils/jsonCsv');
 const jsonToCsv = require("./utils/jsonCsv");
 
 const URL =
-  "https://www.yapo.cl/region_metropolitana/inmuebles?ca=15_s&l=0&f=p&w=1&cmn=&st=a";
+  "https://www.yapo.cl/region_metropolitana/comprar?ca=15_s&l=0&f=p&w=1&cmn=&cmn=310&cmn=319&cmn=320";
 
 async function main() {
   try {
     const connect = await connectToMongoDb();
     console.log(connect);
     // SCRAPE
-    const data = await yaposcraper.scrape(URL, 1);
+    const data = await yaposcraper.scrape(URL, 2);
     // INSERT DATA TO DB
-    // await insertToDb(data);
+    await insertToDb(data);
     // Create CSV
     await jsonToCsv(data);
   } catch (err) {
