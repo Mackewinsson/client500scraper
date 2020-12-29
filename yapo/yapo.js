@@ -195,9 +195,10 @@ const yaposcrapper = {
       $ = cheerio.load(decodedResponse);
       // GETING THE ELEMENTS THAT I NEED FORM EACH ARTICLE
       let url = itemsUrlsArray[i];
-      // let title = $('#da_subject').text();
-      // console.log(title);
-      let price = $('div[id="dataAd"]').attr("data-price");
+      let title = $('h1[id="da_subject"]').text();
+      let price = $('div[id="dataAd"]')
+        .attr("data-price")
+        .replace(/\$\ ?(\d+)?\.(\d+)/g, "$1$2");
       let seller = $("seller-info").attr("username");
       let ispro = $("seller-info").attr("ispro");
       if (ispro === "true") {
@@ -256,7 +257,6 @@ const yaposcrapper = {
         codigo: refcode,
         descripcion: description,
       });
-      // break;
     }
     return resultsObject;
   },

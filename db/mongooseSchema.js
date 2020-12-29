@@ -5,7 +5,7 @@ const clientData = mongoose.model(
   mongoose.Schema({
     url: String,
     titulo: String,
-    precio: String,
+    precio: Number,
     titular: String,
     region: String,
     comuna: String,
@@ -13,6 +13,9 @@ const clientData = mongoose.model(
     telefonoLink: String,
     codigo: Number,
     descripcion: String,
+    created_at: Date,
+    updated_at: Date,
+    deleted_at: Date,
   })
 );
 

@@ -8,10 +8,11 @@ async function insertToDb(data) {
       console.log("Item is already in the DB");
     } else if (dataFromDb == null) {
       console.log("Item NOT in the db");
+
       const newClient = new clientData({
         url: element.url,
         titulo: element.titulo,
-        precio: element.precio,
+        precio: parseInt(element.precio),
         titular: element.titular,
         region: element.region,
         comuna: element.comuna,
@@ -20,6 +21,9 @@ async function insertToDb(data) {
         fechaPublicacion: element.fechaPublicacion,
         codigo: element.codigo,
         descripcion: element.descripcion,
+        created_at: new Date(),
+        updated_at: null,
+        deleted_at: null,
       });
       await newClient.save();
     }
