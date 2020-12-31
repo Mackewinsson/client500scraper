@@ -195,7 +195,7 @@ const yaposcrapper = {
       $ = cheerio.load(decodedResponse);
       // GETING THE ELEMENTS THAT I NEED FORM EACH ARTICLE
       let url = itemsUrlsArray[i];
-      let title = $('h1[id="da_subject"]').text();
+      let title = $('img[id="main_image"]').attr("title");
       let price = $('div[id="dataAd"]')
         .attr("data-price")
         .replace(/\$\ ?(\d+)?\.(\d+)/g, "$1$2");
@@ -246,7 +246,7 @@ const yaposcrapper = {
 
       resultsObject.push({
         url,
-        // titulo: title,
+        titulo: title,
         precio: price,
         titular: seller,
         region,
